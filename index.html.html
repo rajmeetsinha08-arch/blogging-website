@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Switchback — notes you read in order</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#eef2ea;--card:#f7faf4;--ink:#16241f;--soft:#4d6158;--line:#c3d0c4;--flag:#d81b60;--flagtxt:#fff;--hd:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;--bd:'Newsreader',Georgia,serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#101a16;--card:#17241f;--ink:#e4efe6;--soft:#9bb0a3;--line:#2c4037;--flag:#ff5c93;--flagtxt:#1a0710}}
+:root[data-theme="dark"]{--paper:#101a16;--card:#17241f;--ink:#e4efe6;--soft:#9bb0a3;--line:#2c4037;--flag:#ff5c93;--flagtxt:#1a0710}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:19px/1.65 var(--bd)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--flag);outline-offset:2px}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:14px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);background:var(--paper);z-index:5}
+.brand{font:800 24px var(--hd);text-decoration:none;letter-spacing:-.02em;margin-right:auto}
+input,textarea,select{font:inherit;font-size:17px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px 12px;width:100%}
+header input{width:min(240px,100%)}
+button,.btn{font:700 15px var(--hd);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:9px 16px;cursor:pointer;text-decoration:none;display:inline-block}
+button.ghost,.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button.flag{background:var(--flag);color:var(--flagtxt)}
+main{max-width:1000px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 80px}
+.hero{position:relative;padding:56px 0 36px;overflow:hidden}
+.hero svg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero>div{position:relative;z-index:1;max-width:620px}
+h1,h2,h3{font-family:var(--hd);line-height:1.1;letter-spacing:-.025em;margin:0}
+h1{font-size:clamp(40px,8vw,76px);font-weight:800}
+.lede{color:var(--soft);font-size:21px;margin:14px 0 0}
+h2{font-size:26px;margin:44px 0 16px}
+.trail{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.trail h3{font-size:20px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.trail small,.meta{color:var(--soft);font-size:15px}
+.strip{display:flex;align-items:center;overflow-x:auto;padding:16px 4px 6px}
+.stop{display:flex;align-items:center;flex:0 0 auto}
+.stop:not(:last-child)::after{content:"";width:clamp(24px,6vw,54px);height:0;border-top:2px dashed var(--line)}
+.stop.done:not(:last-child)::after{border-top:3px solid var(--flag)}
+.dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--soft);background:var(--paper);display:block}
+.done .dot{background:var(--flag);border-color:var(--flag)}
+.here .dot{outline:3px solid var(--ink);outline-offset:2px}
+.post-row{display:block;text-decoration:none;padding:16px 0;border-top:1px solid var(--line)}
+.post-row h3{font-size:22px}
+.post-row p{margin:4px 0 0;color:var(--soft)}
+.tag{display:inline-block;font:600 14px var(--hd);border:1px solid var(--line);border-radius:99px;padding:1px 10px;margin:4px 6px 0 0;background:transparent;color:var(--soft);cursor:pointer}
+.tag.on{background:var(--ink);color:var(--paper)}
+article{max-width:680px;margin:0 auto}
+article h1{font-size:clamp(34px,6vw,54px);margin:28px 0 10px}
+.body h2{font-size:28px;margin:34px 0 8px}.body h3{font-size:22px;margin:26px 0 6px}
+.body p,.body ul{margin:0 0 1.1em}
+.body blockquote{margin:1.2em 0;padding-left:18px;border-left:4px solid var(--flag);font-style:italic}
+.body code{font:15px ui-monospace,Menlo,monospace;background:var(--card);padding:2px 6px;border-radius:4px;border:1px solid var(--line)}
+.body pre{background:var(--card);border:1px solid var(--line);padding:14px;border-radius:8px;overflow-x:auto}
+.body pre code{border:0;padding:0}
+#bar{position:fixed;left:0;top:0;height:4px;width:0;background:var(--flag);z-index:9}
+.cm{border-top:1px solid var(--line);padding:14px 0}
+.cm b{font-family:var(--hd)}
+.ed{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:760px){.ed{grid-template-columns:1fr}}
+label{display:block;font:700 15px var(--hd);margin:14px 0 6px}
+textarea{min-height:360px;font:16px/1.5 ui-monospace,Menlo,monospace}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.empty{padding:24px;border:1px dashed var(--line);border-radius:10px;color:var(--soft)}
+@media (prefers-reduced-motion:no-preference){#bar{transition:width .1s}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header>
+  <a class="brand" href="#/">Switchback</a>
+  <input id="q" type="search" placeholder="Search notes" aria-label="Search notes">
+  <a class="btn flag" href="#/write">Write a note</a>
+  <button class="ghost" id="theme" aria-label="Toggle dark mode">Light / dark</button>
+</header>
+<main id="app"></main>
+<script>
+const KEY='sb.posts.v1',RKEY='sb.read.v1',TKEY='sb.theme';
+const seed=[
+{id:'s1',title:'Why arrays are fast',path:'Data structures',tags:['memory','arrays'],date:'2026-08-02',comments:[],body:"An array stores items side by side in memory. To find item number 500, the computer does one multiplication and one addition: start address plus 500 times the item size.\n\n## The catch\nInserting in the middle means shifting everything after it.\n\n> Fast to read, slow to rearrange.\n\nUse `arr[i]` when you know the position."},
+{id:'s2',title:'Linked lists, honestly',path:'Data structures',tags:['memory','pointers'],date:'2026-08-09',comments:[],body:"A linked list trades speed of lookup for ease of change. Each node holds a value and a pointer to the next node.\n\n- Insert at the front: one step\n- Find item 500: walk 500 nodes\n\nIf you read more than you rearrange, an array usually wins."},
+{id:'s3',title:'What happens when you type a URL',path:'Web basics',tags:['http','browser'],date:'2026-08-14',comments:[],body:"Your browser looks up the server's address through DNS, opens a connection, sends a request, and receives HTML.\n\n## Then\nIt reads the HTML, finds CSS and scripts, requests those too, and paints the page."},
+{id:'s4',title:'CSS specificity without tears',path:'Web basics',tags:['css'],date:'2026-08-21',comments:[],body:"When two rules fight, the more specific selector wins. IDs beat classes. Classes beat elements.\n\n```\n#nav a { color: red }\n.link { color: blue }\n```\n\nThe link is red. Keep selectors flat and you will rarely need to count."},
+{id:'s5',title:'The two-hour rule',path:'Study habits',tags:['focus'],date:'2026-09-01',comments:[],body:"I stopped studying in long blocks. Two focused hours, then a real break, beat six distracted ones.\n\n**Phone in another room.** That is the whole trick."}];
+const mem={};
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return mem[k]??null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}};
+let posts,read;
+try{posts=JSON.parse(ls.get(KEY))}catch(e){}
+if(!Array.isArray(posts)){posts=seed;}
+try{read=JSON.parse(ls.get(RKEY))}catch(e){}
+if(!Array.isArray(read))read=[];
+const save=()=>{ls.set(KEY,JSON.stringify(posts));ls.set(RKEY,JSON.stringify(read))};
+const $=s=>document.querySelector(s),app=$('#app');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let tagF=null,query='';
+
+function md(src){
+  let t=esc(src),blocks=[];
+  t=t.replace(/```\n?([\s\S]*?)```/g,(m,c)=>{blocks.push('<pre><code>'+c.trim()+'</code></pre>');return '\u0000'+(blocks.length-1)+'\u0000'});
+  const inl=s=>s.replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\*([^*]+)\*/g,'<i>$1</i>');
+  return t.split(/\n{2,}/).map(p=>{
+    p=p.trim();if(!p)return '';
+    let m=p.match(/^\u0000(\d+)\u0000$/);if(m)return blocks[m[1]];
+    if(/^(#{2,3}) /.test(p)){const lines=p.split('\n'),h=lines.shift(),n=h.match(/^#+/)[0].length;return `<h${n}>${inl(h.replace(/^#+ /,''))}</h${n}>`+(lines.length?`<p>${inl(lines.join(' '))}</p>`:'')}
+    if(/^- /m.test(p)&&p.split('\n').every(l=>/^- /.test(l)))return '<ul>'+p.split('\n').map(l=>'<li>'+inl(l.slice(2))+'</li>').join('')+'</ul>';
+    if(/^&gt; /.test(p))return '<blockquote>'+inl(p.replace(/^&gt; /gm,''))+'</blockquote>';
+    return '<p>'+inl(p).replace(/\n/g,'<br>')+'</p>';
+  }).join('').replace(/\u0000(\d+)\u0000/g,(m,i)=>blocks[i]);
+}
+const strip=s=>s.replace(/[#>*`\-]/g,'').replace(/\s+/g,' ').trim();
+const byPath=()=>{const m={};[...posts].sort((a,b)=>a.date.localeCompare(b.date)).forEach(p=>(m[p.path]=m[p.path]||[]).push(p));return m};
+const fmt=d=>new Date(d+'T00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+const mins=p=>Math.max(1,Math.round(p.body.split(/\s+/).length/200));
+
+function stripHTML(list,cur){
+  return '<div class="strip">'+list.map(p=>`<a class="stop ${read.includes(p.id)?'done':''} ${p.id===cur?'here':''}" href="#/post/${p.id}" title="${esc(p.title)}" aria-label="${esc(p.title)}${read.includes(p.id)?' (read)':''}"><span class="dot"></span></a>`).join('')+'</div>';
+}
+function contour(){
+  let s='<svg viewBox="0 0 1000 300" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" fill="none" stroke="var(--line)" stroke-width="1.5">';
+  for(let i=1;i<=13;i++){const r=i*20;let d='';for(let a=0;a<=64;a++){const t=a/64*Math.PI*2,w=1+.16*Math.sin(t*3+i*.3)+.1*Math.cos(t*5-i*.2);d+=(a?'L':'M')+(780+Math.cos(t)*r*1.7*w).toFixed(1)+' '+(150+Math.sin(t)*r*.9*w).toFixed(1)}s+=`<path d="${d}Z"/>`}
+  return s+'</svg>';
+}
+function home(){
+  const paths=byPath();
+  const total=posts.length,done=posts.filter(p=>read.includes(p.id)).length;
+  let list=[...posts].sort((a,b)=>b.date.localeCompare(a.date));
+  const ql=query.toLowerCase();
+  if(ql)list=list.filter(p=>(p.title+p.body+p.tags.join(' ')+p.path).toLowerCase().includes(ql));
+  if(tagF)list=list.filter(p=>p.tags.includes(tagF));
+  const tags=[...new Set(posts.flatMap(p=>p.tags))].sort();
+  app.innerHTML=`<section class="hero">${contour()}<div><h1>Notes you read in order.</h1><p class="lede">Study notes grouped into trails. Walk a trail from the first stop to the last, and the dots turn pink as you go. You have read ${done} of ${total}.</p></div></section>
+  <h2>Trails</h2>
+  ${Object.keys(paths).map(n=>{const l=paths[n],d=l.filter(p=>read.includes(p.id)).length;return `<div class="trail"><h3>${esc(n)}<small>${d} of ${l.length} read</small></h3>${stripHTML(l)}</div>`}).join('')||'<div class="empty">No trails yet. Write your first note and give it a trail name.</div>'}
+  <h2>${ql||tagF?'Matching notes':'All notes'}</h2>
+  <div>${tags.map(t=>`<button class="tag ${t===tagF?'on':''}" data-tag="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+  ${list.map(p=>`<a class="post-row" href="#/post/${p.id}"><h3>${esc(p.title)}</h3><p>${esc(strip(p.body).slice(0,130))}…</p><span class="meta">${esc(p.path)}, ${fmt(p.date)}, ${mins(p)} min${read.includes(p.id)?', read':''}</span></a>`).join('')||'<div class="empty">Nothing matches. Clear the search or pick another tag.</div>'}`;
+  app.querySelectorAll('[data-tag]').forEach(b=>b.onclick=()=>{tagF=tagF===b.dataset.tag?null:b.dataset.tag;home()});
+}
+function markRead(id){if(!read.includes(id)){read.push(id);save();return true}return false}
+function postView(id){
+  const p=posts.find(x=>x.id===id);if(!p){app.innerHTML='<div class="empty">That note does not exist. <a href="#/">Back to trails</a></div>';return}
+  const l=byPath()[p.path],i=l.findIndex(x=>x.id===id),prev=l[i-1],next=l[i+1];
+  app.innerHTML=`<article><a href="#/">All trails</a><h1>${esc(p.title)}</h1><div class="meta">${esc(p.path)}, stop ${i+1} of ${l.length}, ${fmt(p.date)}, ${mins(p)} min read</div>${stripHTML(l,id)}
+  <div class="body">${md(p.body)}</div>
+  <div class="row"><button class="flag" id="rd">${read.includes(id)?'Marked as read':'Mark as read'}</button><a class="btn ghost" href="#/edit/${id}">Edit</a><button class="ghost" id="del">Delete</button></div>
+  <div class="row">${prev?`<a class="btn ghost" href="#/post/${prev.id}">Previous: ${esc(prev.title)}</a>`:''}${next?`<a class="btn" href="#/post/${next.id}">Next: ${esc(next.title)}</a>`:''}</div>
+  <h2>Comments (${p.comments.length})</h2><div id="cms">${p.comments.map(c=>`<div class="cm"><b>${esc(c.n)}</b> <span class="meta">${fmt(c.d)}</span><div>${esc(c.t)}</div></div>`).join('')}</div>
+  <label for="cn">Your name</label><input id="cn" maxlength="40"><label for="ct">Comment</label><textarea id="ct" style="min-height:90px;font-family:var(--bd)" maxlength="600"></textarea>
+  <div class="row"><button id="cb">Post comment</button></div></article>`;
+  $('#rd').onclick=()=>{markRead(id);postView(id)};
+  $('#del').onclick=()=>{if(confirm('Delete this note? This cannot be undone.')){posts=posts.filter(x=>x.id!==id);read=read.filter(x=>x!==id);save();location.hash='#/'}};
+  $('#cb').onclick=()=>{const n=$('#cn').value.trim(),t=$('#ct').value.trim();if(!n||!t){alert('Add your name and a comment first.');return}p.comments.push({n,t,d:new Date().toISOString().slice(0,10)});save();postView(id)};
+}
+function editor(id){
+  const p=id?posts.find(x=>x.id===id):null;
+  if(id&&!p){location.hash='#/';return}
+  const paths=Object.keys(byPath());
+  app.innerHTML=`<h2>${p?'Edit note':'Write a note'}</h2><div class="ed"><div>
+  <label for="et">Title</label><input id="et" value="${p?esc(p.title):''}">
+  <label for="ep">Trail</label><input id="ep" list="pl" value="${p?esc(p.path):''}" placeholder="Pick one or name a new trail"><datalist id="pl">${paths.map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
+  <label for="eg">Tags (comma separated)</label><input id="eg" value="${p?esc(p.tags.join(', ')):''}">
+  <label for="eb">Body (## heading, **bold**, *italic*, - list, &gt; quote, \`code\`)</label><textarea id="eb">${p?esc(p.body):''}</textarea>
+  <div class="row"><button class="flag" id="sv">${p?'Save changes':'Publish note'}</button><a class="btn ghost" href="#/${p?'post/'+id:''}">Cancel</a></div></div>
+  <div><label>Preview</label><div class="body" id="pv"></div></div></div>`;
+  const pv=()=>$('#pv').innerHTML=md($('#eb').value)||'<span class="meta">Your note appears here as you type.</span>';
+  $('#eb').oninput=pv;pv();
+  $('#sv').onclick=()=>{
+    const title=$('#et').value.trim(),path=$('#ep').value.trim(),body=$('#eb').value.trim();
+    if(!title||!path||!body){alert('Title, trail and body are required.');return}
+    const tags=$('#eg').value.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+    if(p){Object.assign(p,{title,path,body,tags})}
+    else{const n={id:'p'+Date.now().toString(36),title,path,tags,body,date:new Date().toISOString().slice(0,10),comments:[]};posts.push(n);id=n.id}
+    save();location.hash='#/post/'+id;
+  };
+}
+function route(){
+  const h=location.hash.replace(/^#\/?/,'').split('/'),bar=$('#bar');bar.style.width='0';window.scrollTo(0,0);
+  if(h[0]==='post')postView(h[1]);else if(h[0]==='write')editor();else if(h[0]==='edit')editor(h[1]);else home();
+}
+addEventListener('hashchange',route);
+addEventListener('scroll',()=>{
+  const h=document.documentElement,r=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight),isPost=location.hash.startsWith('#/post/');
+  $('#bar').style.width=isPost?(r*100)+'%':'0';
+  if(isPost&&r>.93&&!document.hidden){const id=location.hash.split('/')[2];if(posts.some(p=>p.id===id)&&markRead(id)){const b=$('#rd');if(b)b.textContent='Marked as read';document.querySelectorAll('.strip .stop').forEach(s=>{if(s.getAttribute('href')==='#/post/'+id)s.classList.add('done')})}}
+},{passive:true});
+$('#q').oninput=e=>{query=e.target.value;if(location.hash&&location.hash!=='#/'){location.hash='#/'}else home()};
+$('#theme').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark';ls.set(TKEY,r.dataset.theme)};
+const th=ls.get(TKEY);if(th)document.documentElement.dataset.theme=th;
+route();
+</script>
+</body>
+</html>
